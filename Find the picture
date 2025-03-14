@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Βρες την Κρυμμένη Εικόνα</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background-color: #f0f0f5;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            color: #333;
+        }
+        .score {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .hidden-image {
+            position: absolute;
+            width: 80px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .hidden-image:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Βρες την Κρυμμένη Εικόνα!</h1>
+    <p class="score">Πόντοι: <span id="score">0</span></p>
+    <img src="image.png" id="hiddenImg" class="hidden-image" onclick="foundImage()">
+    
+    <script>
+        let score = 0;
+        let img = document.getElementById("hiddenImg");
+        
+        function getRandomPosition() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            return { x, y };
+        }
+        
+        function placeImage() {
+            let pos = getRandomPosition();
+            img.style.left = `${pos.x}px`;
+            img.style.top = `${pos.y}px`;
+        }
+        
+        function foundImage() {
+            score++;
+            document.getElementById("score").innerText = score;
+            placeImage();
+        }
+        
+        placeImage(); // Αρχική τοποθέτηση
+    </script>
+</body>
+</html>
